@@ -38,6 +38,13 @@ export type ClientConfig = {
    **/
   wsEndpoint?: string;
 
+  /**
+   * Specify a websocket endpoint to be used for subscriptions via ActionCable.
+   * The `wss` protocol is recommended in production.
+   * @type {string}
+   **/
+  wsActionCable?: string;
+
   // Enable Automatic Query persisting with Apollo Engine
   // persisting?: boolean
 

@@ -36,6 +36,8 @@
     "@rollup/plugin-graphql": "^2.0.4",
     "@vue/apollo-composable": "^4.0.1",
     "@vue/apollo-option": "^4.0.0",
+    "actioncable": "^5.2.8-1",
+    "graphql-ruby-client": "^1.13.3",
     "defu": "^6.1.4",
     "destr": "^2.0.3",
     "graphql": "^16.8.1",

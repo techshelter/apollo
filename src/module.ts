@@ -85,8 +85,8 @@ export default defineNuxtModule<ModuleOptions>({
 
         v.defaultOptions = v?.defaultOptions || options.defaultOptions
 
-        if (!v?.httpEndpoint && !v?.wsEndpoint) {
-          logger.error(`Either \`httpEndpoint\` or \`wsEndpoint\` must be provided for client: \`${k}\``)
+        if (!v?.httpEndpoint && !v?.wsEndpoint && !v.wsActionCable) {
+          logger.error(`Either \`httpEndpoint\` or \`wsEndpoint\` or \`wsActionCable\` must be provided for client: \`${k}\``)
         }
 
         clients[k] = v

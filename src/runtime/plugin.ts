@@ -6,6 +6,8 @@ import { ApolloClients, provideApolloClients } from '@vue/apollo-composable'
 import { ApolloClient, ApolloLink, createHttpLink, InMemoryCache, split } from '@apollo/client/core'
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { setContext } from '@apollo/client/link/context'
+import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink'
+import ActionCable from 'actioncable'
 import type { ClientConfig, ErrorResponse } from '../types'
 import createRestartableClient from './ws'
 import { useApollo } from './composables'
@@ -90,6 +92,16 @@ export default defineNuxtPlugin((nuxtApp) => {
 
       // @ts-ignore
       nuxtApp._apolloWsClients[key] = wsClient
+    }
+
+    if (process.client && clientConfig.wsActionCable) {
+      const token = useUserData() // your token composable
+      const cable = ActionCable.createConsumer(`${wsActionCable}?token=${token.value}`)
+      wsLink = new ActionCableLink({ cable })
+      nuxtApp._apolloWsClients = nuxtApp._apolloWsClients || {}
+
+      // @ts-ignore
+      nuxtApp._apolloWsClients[key] = cable
     }
 
     const errorLink = onError((err) => {
